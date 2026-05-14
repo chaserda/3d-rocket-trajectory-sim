@@ -75,6 +75,22 @@ ax3.plot(lons[0], lats[0], "o", color="#ff5252",
 ax3.plot(lons[-1], lats[-1], "o", color="#00ffaa",
          markersize=7, label="SECO / orbit insertion", zorder=5)
 
+# Mark key events on the ground track
+milestones = [74, 150, 153]
+labels     = ["Max-Q", "MECO", "Stage Sep"]
+for mi, lbl in zip(milestones, labels):
+    idx = min(mi, len(pts)-1)
+    ax3.plot(pts[idx]["lon"], pts[idx]["lat"],
+             "^", color="#ffd04d", markersize=5, zorder=5)
+    ax3.annotate(lbl,
+                 (pts[idx]["lon"], pts[idx]["lat"]),
+                 textcoords="offset points", xytext=(6, 4),
+                 color="#ffd04d", fontsize=7)
+
+ax3.legend(fontsize=7, facecolor="#0d1520",
+           labelcolor="white", framealpha=0.8)
+style_ax(ax3, "Ground Track", "Longitude (°)", "Latitude (°)")
+
 # SAVE AND SHOW THE FIGURE
 plt.savefig("backend/trajectory_check.png",
             dpi=150, bbox_inches="tight",
