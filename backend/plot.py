@@ -55,6 +55,18 @@ ax1.axhline(400, color="#00ffaa", linewidth=0.8,
 ax1.legend(fontsize=7, facecolor="#0d1520", labelcolor="white", framealpha=0.8)
 style_ax(ax1, "Altitude vs Time", "Time (s)", "Altitude (km)")
 
+# CHART 2: VELOCITY vs TIME
+# Top-right slot in the 2x2 grid
+# X axis = time in seconds, Y axis = velocity in km/s
+ax2 = fig.add_subplot(gs[0, 1])
+ax2.plot(t, vel_kms, color="#00ffaa", linewidth=1.8)
+ax2.axhline(7670, color="#ffd04d", linewidth=0.8,
+            linestyle="--", label="Orbital velocity ~7.67 m/s")
+ax2.legend(fontsize=7, facecolor="#0d1520",
+           labelcolor="white", framealpha=0.8)
+style_ax(ax2, "Velocity vs Time", "Time (s)", "Velocity (km/s)")
+
+
 # SAVE AND SHOW THE FIGURE
 plt.savefig("backend/trajectory_check.png",
             dpi=150, bbox_inches="tight",
