@@ -91,6 +91,30 @@ ax3.legend(fontsize=7, facecolor="#0d1520",
            labelcolor="white", framealpha=0.8)
 style_ax(ax3, "Ground Track", "Longitude (°)", "Latitude (°)")
 
+# CHART 4: ALTITUDE vs DOWNRANGE
+# Bottom-right slot in the 2x2 grid
+downrange_km = []
+for p in pts:
+    import math
+    lat0 = math.radians(28.392)
+    lon0 = math.radians(-80.603)
+    lat1 = math.radians(p["lat"])
+    lon1 = math.radians(p["lon"])
+    dlat = lat1 - lat0
+    dlon = lon1 - lon0
+    a = (math.sin(dlat/2)**2 +
+         math.cos(lat0) * math.cos(lat1) * math.sin(dlon/2)**2)
+    downrange_km.append(6371 * 2 * math.asin(math.sqrt(a)))
+
+ax4 = fig.add_subplot(gs[1, 1])
+ax4.plot(downrange_km, alt_km, color="#ff9d4d", linewidth=1.8)
+ax4.axhline(100, color="#ffd04d", linewidth=0.8,
+            linestyle="--", label="Kármán line")
+ax4.legend(fontsize=7, facecolor="#0d1520",
+           labelcolor="white", framealpha=0.8)
+style_ax(ax4, "Altitude vs Downrange", "Downrange (km)", "Altitude (km)")
+
+
 # SAVE AND SHOW THE FIGURE
 plt.savefig("backend/trajectory_check.png",
             dpi=150, bbox_inches="tight",
