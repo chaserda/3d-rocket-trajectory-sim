@@ -66,6 +66,14 @@ ax2.legend(fontsize=7, facecolor="#0d1520",
            labelcolor="white", framealpha=0.8)
 style_ax(ax2, "Velocity vs Time", "Time (s)", "Velocity (km/s)")
 
+# CHART 3: GROUND TRACK (LATITUDE vs LONGITUDE)
+# Bottom-left slot in the 2x2 grid
+ax3 = fig.add_subplot(gs[1, 0])
+ax3.plot(lons, lats, color="#b48dff", linewidth=1.8)
+ax3.plot(lons[0], lats[0], "o", color="#ff5252",
+         markersize=7, label="Launch (Cape Canaveral)", zorder=5)
+ax3.plot(lons[-1], lats[-1], "o", color="#00ffaa",
+         markersize=7, label="SECO / orbit insertion", zorder=5)
 
 # SAVE AND SHOW THE FIGURE
 plt.savefig("backend/trajectory_check.png",
